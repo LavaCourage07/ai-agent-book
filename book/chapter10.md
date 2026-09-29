@@ -1,5 +1,11 @@
 # 多 Agent 协作
 
+## 本章可编辑思维导图
+
+> [在 VS Code Office Viewer 中打开并编辑第 10 章 XMind 思维导图](../mindmaps/chapter10-mindmap.xmind)
+>
+> 根主题在左、知识分支向右展开。选中节点后：`Tab` 新增子节点，`Enter` 新增同级节点，`Delete` 删除节点；编辑完成后保存即可。
+
 前九章围绕单个 Agent 展开：先构建上下文、知识、工具与交互能力，再通过评估、后训练和持续进化让它长期变好。本章把问题从“如何构建和改进一个 Agent”推进到“如何组织多个 Agent”——让它们通过分工、通信与相互验证完成单个 Agent 难以承担的任务。
 
 在 OpenAI 曾提出的五级 AI 能力框架（Level 1 对话者、Level 2 思考者（Reasoners）、Level 3 智能体、Level 4 创新者、Level 5 组织（Organizations））中，多 Agent 协作常被类比为通向第五级的路径之一——需要说明的是，此处 Organizations 指的是“AI 能完成整个组织的工作”这一能力级别，而非对系统架构的要求，足够强大的单个 Agent 理论上也能达到。但就今天的工程现实而言，单个 Agent 终究受限于自身模型的能力边界和上下文窗口。
