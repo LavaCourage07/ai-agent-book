@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1024" viewBox="0 0 1792 1024">
+  <rect width="1792" height="1024" fill="#fff"/>
+  <g fill="none" stroke="#181818" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M165 346 C290 295 480 325 529 430 L500 736 C400 788 225 762 159 681Z"/>
+    <path d="M213 432 L444 432 M213 488 L414 488 M213 544 L430 544 M213 600 L385 600"/>
+    <rect x="236" y="387" width="165" height="44" rx="12" stroke="#e84b2b"/><path d="M250 395 L386 423 M386 395 L250 423" stroke="#e84b2b"/>
+    <path d="M609 456 C679 367 867 357 950 440 L936 688 C860 766 670 750 608 664Z"/>
+    <path d="M662 485 C719 451 828 448 889 485 M654 594 C718 621 829 621 897 594"/>
+    <path d="M539 542 C573 542 591 542 607 542" stroke="#f48a22"/><path d="M579 526 L610 542 L579 558" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M1032 373 C1125 315 1397 328 1495 418 L1471 750 C1350 814 1141 798 1040 711Z"/>
+    <path d="M1083 463 L1437 463 M1083 524 L1369 524 M1083 585 L1418 585 M1083 646 L1329 646"/>
+    <rect x="1090" y="410" width="122" height="44" rx="12" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M950 539 C985 539 1005 539 1027 539" stroke="#f48a22"/><path d="M998 523 L1030 539 L998 556" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M150 798 C208 754 315 762 352 812 C384 858 356 928 296 939 C227 947 165 903 150 846Z" fill="#181818"/>
+    <ellipse cx="244" cy="845" rx="9" ry="14" fill="#fff" stroke="none"/><ellipse cx="277" cy="845" rx="9" ry="14" fill="#fff" stroke="none"/>
+    <path d="M190 903 L175 961 M323 903 L340 961 M330 830 C396 795 476 751 540 687"/>
+  </g>
+  <g font-family="PingFang SC, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="700" fill="#181818">
+    <text x="153" y="288">原始日志</text><text x="588" y="324">脱敏筛选</text><text x="1084" y="300" fill="#1d74d8">可用学习信号</text>
+    <text x="221" y="418" fill="#e84b2b">身份信息</text><text x="1150" y="445" fill="#1d74d8">保留任务结构</text><text x="530" y="865">先去身份，再做整理</text>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1024" viewBox="0 0 1792 1024">
+  <rect width="1792" height="1024" fill="#fff"/>
+  <g fill="none" stroke="#181818" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M112 710 C128 630 332 613 375 688 L376 824 C310 858 165 849 112 798Z"/>
+    <path d="M142 705 C199 730 299 728 350 698 M151 753 C220 778 294 774 347 750"/>
+    <path d="M244 470 L244 643 M214 511 L244 469 L274 511" stroke="#f48a22"/>
+    <path d="M520 390 C593 344 786 360 837 435 L810 735 C738 784 587 772 530 709Z"/>
+    <path d="M568 458 C624 424 737 428 784 466 M553 586 C619 618 739 615 805 579"/>
+    <path d="M607 495 L743 495 M607 533 L709 533 M607 654 L742 654"/>
+    <path d="M384 718 C433 700 474 660 517 589" stroke="#f48a22"/>
+    <path d="M491 589 L523 589 L505 618" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M952 477 C1040 399 1277 414 1358 500 L1332 720 C1241 788 1053 777 963 711Z"/>
+    <path d="M998 537 C1073 502 1239 505 1311 543 L1300 690 C1231 724 1066 723 991 687Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M1032 590 L1249 590 M1032 635 L1209 635"/>
+    <path d="M833 601 C885 601 918 601 950 601" stroke="#f48a22"/>
+    <path d="M922 585 L956 601 L922 618" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M1421 630 C1454 575 1555 570 1604 617 C1649 662 1629 754 1570 775 C1502 793 1433 755 1421 700Z" fill="#181818"/>
+    <ellipse cx="1516" cy="673" rx="9" ry="14" fill="#fff" stroke="none"/><ellipse cx="1550" cy="673" rx="9" ry="14" fill="#fff" stroke="none"/>
+    <path d="M1468 754 L1452 820 M1588 754 L1605 820"/>
+    <path d="M1464 654 C1414 621 1376 597 1340 572"/>
+  </g>
+  <g font-family="PingFang SC, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="700" fill="#181818">
+    <text x="128" y="894">只增日志</text><text x="502" y="323">定期整理</text><text x="1012" y="820" fill="#1d74d8">派生记忆</text>
+    <text x="1320" y="559" fill="#f48a22">从原始证据重建</text><text x="536" y="874">不直接把一次对话写死</text>
+  </g>
+</svg>

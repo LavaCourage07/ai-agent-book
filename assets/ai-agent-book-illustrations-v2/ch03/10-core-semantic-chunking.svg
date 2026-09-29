@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1024" viewBox="0 0 1792 1024">
+  <rect width="1792" height="1024" fill="#fff"/>
+  <g fill="none" stroke="#181818" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M151 385 C255 338 545 354 670 414 L642 714 C505 766 263 752 151 694Z"/>
+    <path d="M206 459 L606 459 M206 520 L574 520 M206 581 L601 581 M206 642 L535 642"/>
+    <path d="M678 541 C740 489 805 449 878 412" stroke="#f48a22"/><path d="M844 403 L883 409 L858 438" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M910 335 L1135 335 L1117 582 L892 582Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M1133 453 L1358 453 L1340 700 L1115 700Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M889 569 L1116 569" stroke="#1d74d8"/><path d="M923 416 L1086 416 M923 477 L1086 477 M1147 535 L1328 535 M1147 596 L1328 596"/>
+    <path d="M1211 742 C1263 682 1369 693 1405 754 C1437 809 1405 883 1343 893 C1276 904 1222 853 1211 797Z" fill="#181818"/>
+    <ellipse cx="1299" cy="795" rx="9" ry="14" fill="#fff" stroke="none"/><ellipse cx="1332" cy="795" rx="9" ry="14" fill="#fff" stroke="none"/>
+    <path d="M1255 853 L1240 915 M1376 853 L1393 915 M1240 775 L1150 724"/>
+    <path d="M1416 358 L1647 358 L1627 612 L1396 612Z"/>
+    <path d="M1439 424 L1606 424 M1439 486 L1606 486 M1520 340 L1520 628" stroke="#e84b2b"/>
+    <path d="M1489 329 L1551 389 M1551 329 L1489 389" stroke="#e84b2b"/>
+  </g>
+  <g font-family="PingFang SC, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="700" fill="#181818">
+    <text x="192" y="316">长文档</text><text x="875" y="288" fill="#1d74d8">按语义切块</text><text x="1100" y="656" fill="#1d74d8">必要重叠</text>
+    <text x="1450" y="306" fill="#e84b2b">硬切断</text><text x="952" y="926">小黑在接住上下文</text>
+  </g>
+</svg>

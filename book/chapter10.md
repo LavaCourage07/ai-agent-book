@@ -14,6 +14,8 @@
 
 ### 维度一：上下文是否共享
 
+![小黑图：共享上下文与隔离上下文的差别](../assets/ai-agent-book-illustrations-v2/ch10/02-core-shared-vs-isolated-context.png)
+
 这是最基础的架构决策，决定了多个 Agent 之间如何传递信息。
 
 **共享上下文**意味着后续 Agent 接收前一个 Agent 的完整对话历史和轨迹（第一章定义的 trajectory）。每个阶段切换系统提示词和工具集后，就变成了一个新的 Agent（因为它的身份、职责和能力都发生了变化），但它保留了前任的全部记忆。比如一个团队里，需求分析师写完需求文档后，开发者不仅拿到了文档，还能看到分析师与用户的所有沟通记录——他是一个新角色，但完整保留了之前的上下文。优势在于信息不丢失，每个 Agent 都能回顾之前任何阶段的细节；挑战在于上下文可能快速膨胀。
@@ -33,6 +35,8 @@
 
 ### 维度二：协作拓扑
 
+![小黑图：对等、管理者与去中心化三种协作拓扑](../assets/ai-agent-book-illustrations-v2/ch10/04-core-collaboration-topologies.svg)
+
 第二个维度是协作拓扑——Agent 之间的控制权和信息按什么结构流动。协作拓扑有三种典型形态：
 
 - **对等协作模式**（Peer Collaboration Pattern）：少量 Agent 按照固定的拓扑形成迭代改进循环，例如论文写作 Agent 由起草者和评论者两个 Agent 组成，一方起草、另一方批注修改，反复几轮后质量更高。
@@ -44,6 +48,10 @@
 各模式的详细设计和适用场景将在后面的专题小节中展开讨论。
 
 ## 多 Agent 何时真正优于单 Agent
+
+![小黑图：多 Agent 必须引入单 Agent 没有的新信息](../assets/ai-agent-book-illustrations-v2/ch10/01-core-multi-agent-independent-value.png)
+
+![小黑补充图：先检验协作是否真的带来了新信息](../assets/ai-agent-book-illustrations-v2/ch10/21-s-new-information-test.png)
 
 在进入具体的协作架构之前，先回答一个更根本的问题：**什么时候真正需要多个 Agent，什么时候一个 Agent 就够了？** 这个问题的答案会成为后文所有工程方案的总体参照。近年的一系列研究给出了一个清晰的判断框架——核心判据只有一条：**协作过程是否引入了单个 Agent 在生成时无法获得的新信息？**
 
@@ -78,6 +86,8 @@ Anthropic 2026 年的漏洞挖掘实验给出了一个案例：45 个 Agent 通�
 
 ## 共享上下文的多 Agent 协作
 
+![小黑图：共享上下文中角色切换与消息传递](../assets/ai-agent-book-illustrations-v2/ch10/03-core-communication-mechanisms.png)
+
 共享上下文的多 Agent 协作中，每个阶段都是一个独立的 Agent（拥有自己的系统提示词和工具集），但它继承了前序 Agent 的完整轨迹——就像接班的同事能翻阅前任留下的所有工作日志。这种 “继承式协作” 的核心优势在于信息不会丢失，每个 Agent 都能回顾之前任何阶段的细节。挑战则在于如何让当前 Agent 专注于自己的核心职责，而不被继承来的大量历史信息所干扰。
 
 在复杂任务中，Agent 的角色和职责可能在不同阶段发生显著变化。如果始终使用同一套静态系统提示词，要么过于笼统缺乏针对性，要么把所有阶段的指导塞在一起导致过于冗长。多阶段角色转换的做法是：根据当前阶段动态切换系统提示词和工具集，让 Agent 在每个阶段都以最合适的 “身份” 工作。
@@ -100,6 +110,10 @@ Anthropic 2026 年的漏洞挖掘实验给出了一个案例：45 个 Agent 通�
 > **路径二：Skill**。system prompt 和完整工具全集在整个会话中固定；模型按需调用 `load_skill(name)`，读取的 `SKILL.md` 作为 tool result 进入共享轨迹。这样静态前缀不因角色变化而重写，但工具仍然可见，硬权限由 harness 中的规则保证。
 
 ## 不共享上下文的多 Agent 协作
+
+![小黑图：Skill 与 handoff 的职责和上下文边界](../assets/ai-agent-book-illustrations-v2/ch10/05-core-skill-vs-handoff.svg)
+
+![小黑补充图：handoff 交接的是可执行任务包，不是完整私有轨迹](../assets/ai-agent-book-illustrations-v2/ch10/22-s-handoff-package.png)
 
 不共享上下文代表真正的多 Agent 协作。在这种架构下，每个 Agent 都是独立的实体，拥有自己的上下文、轨迹和状态；彼此无法直接访问对方的 “内心活动”，协作完全依赖本章开头介绍的三种通信机制（工具调用参数、共享文件系统、消息总线）。
 
@@ -131,6 +145,8 @@ Anthropic 2026 年的漏洞挖掘实验给出了一个案例：45 个 Agent 通�
 不共享上下文的显式协作依赖两套与拓扑无关的基础设施。其一是**共享文件系统**，作为 Agent 间交换产物、与用户交换文件的持久媒介，构成协作的数据平面；其二是**通信与控制机制**，支持 Agent 间的消息传递、状态查询、执行终止与资源调度，构成协作的控制平面。
 
 ### Agent 眼中的文件系统
+
+![小黑图：虚拟文件系统的私有、共享、挂载与只读区域](../assets/ai-agent-book-illustrations-v2/ch10/06-core-virtual-filesystem.png)
 
 在实际系统中，Agent 访问的并非单一存储，而是一个**虚拟文件系统**（virtual filesystem）：来源、生命周期与权限各异的存储被挂载（mount）到同一目录树下，Agent 通过统一的 `read_file`/`write_file`/`list_dir` 接口访问，底层则可能是本地临时盘、持久对象存储、第三方云盘的 API 或只读的系统资源包。明确这棵目录树的构成（每一区域的可见性与生命周期）是多 Agent 协作设计的前提：相当一部分并发冲突与信息泄露，源于将本应隔离的区域混置。这棵目录树相当于 Agent 的地址空间，四类区域就是权限各异的内存段：有的私有可写，有的多方共享，有的只读。
 
@@ -165,6 +181,10 @@ Anthropic 2026 年的漏洞挖掘实验给出了一个案例：45 个 Agent 通�
 
 ### Agent 间的通信与控制
 
+![小黑图：消息信封让状态与产物都可路由和追溯](../assets/ai-agent-book-illustrations-v2/ch10/07-core-message-envelope-state.png)
+
+![小黑图：状态查询、终止与资源调度共同构成控制平面](../assets/ai-agent-book-illustrations-v2/ch10/08-core-termination-scheduling.png)
+
 文件系统解决了 Agent 间**产物交换**的问题，协作还需要一条**控制平面**。这正是表10-2 中生命周期各行的用武之地：第四章给出的这组工具原语——创建（`spawn_subagent`）、发消息（`send_message_to_subagent`）、取消（`cancel_subagent`）、发现（`list_agents`）——对应进程世界的 fork、消息、kill 和 ps。
 
 **一、消息传递。** 最简形态为点对点：Agent A 直接调用 `send_message_to_agent_b(content)`，适用于拓扑固定、Agent 数量少的场景（如本章实验 10-3 的电话 + 电脑双 Agent）。当 Agent 数量增多且需异步并行时，点对点连接数随 Agent 数呈平方增长，且要求收发双方同时在线；此时应改用**消息总线**（详见本章后文“并行协调形态”）：Agent 将消息发布至总线，由总线按订阅关系转发，发送方无需知晓消费者。无论点对点还是经总线，消息通常应携带结构化的**信封**（envelope）：发送者 ID、目标（指定 Agent 或广播）、消息类型（如 `task_assigned`/`status_update`/`result`/`terminate`）及 JSON 负载。统一的信封格式保证接收方能够可靠地路由和解析消息，并使协作链路可追溯——这是多 Agent 系统调试的关键。
@@ -198,6 +218,10 @@ Anthropic 2026 年的漏洞挖掘实验给出了一个案例：45 个 Agent 通�
 相比管理者和去中心化模式，对等协作的实现复杂度更低：只需定义好两个 Agent 的角色、通信机制和迭代终止条件，就可以跑起来。
 
 #### Loop 工程
+
+![小黑图：提议、验证、记录与继续的对等协作闭环](../assets/ai-agent-book-illustrations-v2/ch10/09-core-peer-evidence-loop.png)
+
+![小黑补充图：完成宣称必须由独立证据和完成标准审核](../assets/ai-agent-book-illustrations-v2/ch10/23-s-review-evidence.png)
 
 对等协作最经典的用途，是解决 Agent 实践中极其常见的一类失败：**过早终止**——活干到一半就停。它有三种典型形态，下面用 Coding Agent 和笔者团队打造的 Pine AI（引言介绍过的替用户打电话与商家、运营商交涉办事的 Agent）各举几例。一是**偷懒式假完成**：只做了一部分就宣称全部做完——Coding Agent 写完代码，测试没跑、部署没试，就报告“任务完成”；用户交给 Pine AI 两件事，它办完第一件就把第二件忘了，径直汇报“都办好了”。二是**过早放弃**：一条路走不通就宣布整件事办不成——Pine AI 联系商家本有打电话、填表单、发邮件等多种途径，打了一个电话被拒绝，就直接告诉用户“这事办不了”，其实换个渠道再试很可能就成了。三是**假成功**：Agent 以为办成了，实际闭环没走完——电话里对方口头同意退款，但用户还需要在手机 App 上确认一步，Agent 却报告“已办妥”，用户不知道还有后续动作，退款实际没有落地。三种形态指向同一个根源：**在验证之前，“完成”只是模型的一句宣称，不是证明**。
 
@@ -267,6 +291,8 @@ Anthropic 2026 年的长程应用开发实验把这一思路实现为规划者�
 
 #### 辩论模式
 
+![小黑图：辩论、头脑风暴和专家小组如何分别引入新信息](../assets/ai-agent-book-illustrations-v2/ch10/10-core-debate-brainstorm-experts.png)
+
 多个 Agent 各持不同立场，通过对抗性对话深入探索问题空间。比如评估一个技术方案时，Agent A 扮演“支持者”列举方案优势和机会，Agent B 扮演“反对者”指出风险和局限，每轮辩论都针对对方的论点提出反驳或补充。单一 Agent 分析时，模型往往倾向某个观点而忽视反面证据；辩论模式则通过制度化的对抗，确保正反两面都得到充分论证，帮助决策者做出更平衡的判断。
 
 不过，辩论模式的实际效果在学术界仍有争议。2026 年 Tran 与 Kiela 的研究 [^single-agent-2026] 在多跳推理任务上对比了单 Agent 与五种多 Agent 架构（顺序、辩论、集成、并行角色、子任务并行），发现当思考 token 预算被严格控制为相同时，单 Agent 的表现与多 Agent 持平甚至更好。研究者基于信息论中的数据处理不等式给出了解释：辩论中的多个 Agent 处理的是完全相同的文本信息，Agent 之间每一次串行传递中间结论都只可能丢失信息、不可能凭空创造信息。辩论模式在一些学术论文中的收益很可能来源于多个 Agent 消耗了更多的总计算量。不过，它并不否定另一类做法——对同一问题**多次独立采样再聚合**（如自一致性、多数投票），或利用**生成与验证的难度不对称**（写出答案难、检验答案易）来做生成-验证分工。
@@ -282,6 +308,10 @@ Anthropic 2026 年的长程应用开发实验把这一思路实现为规划者�
 多个 Agent 各自代表一个专业领域的视角，共同讨论跨学科问题。比如评估新产品的可行性时，工程师 Agent 从技术角度分析实现难度，产品 Agent 从用户体验角度评估市场吸引力，运营 Agent 从成本和资源角度分析商业可行性。这些 Agent 之间不是对抗关系，而是互补关系，共同拼出问题的全貌，识别跨领域的约束和机会。
 
 ### 管理者模式：中心化协调
+
+![小黑图：Manager 的拆解、派发、跟踪和汇总，以及中心瓶颈](../assets/ai-agent-book-illustrations-v2/ch10/11-core-manager-bottleneck.png)
+
+![小黑补充图：Manager 只汇集结构化摘要、证据和异常，再通过关键闸门决策](../assets/ai-agent-book-illustrations-v2/ch10/24-s-manager-hourglass.png)
 
 当任务涉及大量子任务、需要动态调度或子任务之间存在复杂依赖时，对等协作就力不从心了，需要引入管理者模式。Manager Agent 的职责就像一个项目经理：先理解整体任务，再拆解为可分配的子任务，选择合适的 Agent 去执行，跟踪进度并处理异常（重试、换 Agent、调整计划），最后把各 Agent 的输出整合为最终结果。
 
@@ -315,6 +345,8 @@ return summarize_failures(workers)
 
 **顺序协调形态。**
 
+![小黑图：顺序协调适合依赖链，并行协调适合彼此独立的子任务](../assets/ai-agent-book-illustrations-v2/ch10/12-core-sequential-vs-parallel.png)
+
 
 ![图10-4 Manager 顺序协调](images/fig10-4.svg)
 
@@ -322,6 +354,8 @@ return summarize_failures(workers)
 Manager 按顺序依次调用专门 Agent，每个 Agent 完成后返回结果，Manager 再决定下一步。控制流是线性的，简单明了，适合子任务之间有清晰先后依赖的场景。
 
 > **实验 10-2 ★★：书籍翻译 Agent**
+
+> ![小黑图：翻译协作按职责切分上下文，并以术语表和审校报告交接](../assets/ai-agent-book-illustrations-v2/ch10/13-core-translation-coordination.png)
 >
 > 书籍翻译是一项典型的、需要多 Agent 协作的复杂任务。翻译一本技术书籍，不仅仅是把文字从一种语言转换为另一种语言，更需要保证专业术语全书一致、语境准确、整体阅读流畅。比如翻译一本大语言模型相关的英文书，大量术语会反复出现，可能有多种约定俗成的说法，必须全书统一，例如第一章把 agent 译为“智能体”，后面就不能改成“代理”。
 >
@@ -368,6 +402,8 @@ Manager 按顺序依次调用专门 Agent，每个 Agent 完成后返回结果�
 [^lingtai]: 灵台官方教程：https://lingtai.ai/zh/tutorial/
 
 > **实验 10-3 ★★★：自主编排的电话 + 电脑 Agent**
+
+> ![小黑图：电话 Agent 收集并校验字段，电脑 Agent 同步填写并反馈](../assets/ai-agent-book-illustrations-v2/ch10/14-core-telephone-computer-collaboration.png)
 >
 > **前置要求**：本实验综合运用第六章的 Computer Use 和语音 Agent 技术。
 >
@@ -394,6 +430,8 @@ Manager 按顺序依次调用专门 Agent，每个 Agent 完成后返回结果�
 > ![图10-7 Phone 与 Computer 双 Agent 架构](images/fig10-7.svg)
 
 > **实验 10-4 ★★★：同时从多个网站搜集信息的 Agent**
+
+> ![小黑图：并行搜索在第一个已验证成功后原子结算并取消其余分支](../assets/ai-agent-book-illustrations-v2/ch10/15-core-parallel-search-atomic-settlement.png)
 >
 > **前置要求**：建议先了解第六章的事件驱动与中断机制。
 >
@@ -441,6 +479,8 @@ await agent(writeProvenance(results.flat()))      // 汇总：等齐所有结果
 ```
 
 ### 去中心化模式
+
+![小黑图：去中心化移交用任务包而非共享全部轨迹](../assets/ai-agent-book-illustrations-v2/ch10/16-core-decentralized-a2a.png)
 
 有了管理者模式，为什么还要去中心化模式？去掉中心控制者的动机，主要在于模拟人类社会的组织方式：让多个职责对等的角色分工与制衡，各自从自己的专业视角审视问题、自主决定与谁沟通，而不是把所有判断都汇集到一个 Manager 那里。在去中心化模式中，每个 Agent 根据自己的专业判断，自主决定何时向其他 Agent 发起沟通——可能是移交任务（“我的部分做完了，交给你”），也可能是请求反馈（“这个方案技术上可行吗？”），或者报告问题（“你给的需求有矛盾，我们需要重新讨论”）。
 
@@ -536,6 +576,10 @@ A2A 的定位可以和第四章的 MCP 对照理解：MCP 解决的是 Agent 与
 
 ### 失败模式一：共享文件系统的并发冲突
 
+![小黑图：文件级冲突与语义冲突需要隔离、版本锁和合并审查](../assets/ai-agent-book-illustrations-v2/ch10/17-core-shared-resource-conflicts.png)
+
+![小黑补充图：最小权限、资源所有权、配额和审计共同构成协作防火墙](../assets/ai-agent-book-illustrations-v2/ch10/25-s-collaboration-firewall.png)
+
 一旦选择共享内存式通信，并发冲突就会随之而来——这是操作系统和数据库几十年前就解决过的问题。冲突可以分为两类。
 
 **简单冲突（文件级写入冲突）**：两个 Agent 同时修改同一个文件，后写入的那个把先写入的修改覆盖掉了。
@@ -547,6 +591,8 @@ A2A 的定位可以和第四章的 MCP 对照理解：MCP 解决的是 Agent 与
 需要注意的是，乐观锁只能防止**同一文件**的写入冲突。对于前述的**跨文件语义冲突**，则需要更高层的语义校验机制。在多个 Coding Agent 并发修改同一代码库这一最常见的场景里，业界主流的做法是**工作副本隔离**：为每个 Agent 分配独立的 Git 分支或 worktree，各自在自己的副本上并行修改、互不干扰，冲突被集中推迟到最后的合并点。
 
 ### 失败模式二：错误的级联放大
+
+![小黑图：错误会级联放大，同质 Agent 也会独立地产生同样的错误](../assets/ai-agent-book-illustrations-v2/ch10/18-core-cascade-and-homogeneity.png)
 
 进程间传递字节，逐位保真，但 Agent 间传递语义，每转述一次都是有损的重新编码。当多个 Agent 频繁互动时，一个 Agent 的错误可能被后续 Agent 逐层强化，就像 “传话游戏” 中信息越传越走样。
 
@@ -566,6 +612,8 @@ MetaGPT 的早期版本也出现过多个开发角色 Agent 之间像患了大�
 
 ### 失败模式五：循环失控
 
+![小黑图：循环需要终止条件、预算与人工接管，也要防止理解债](../assets/ai-agent-book-illustrations-v2/ch10/19-core-runaway-loops-understanding-debt.png)
+
 “对等协作”一节讨论的过早终止是循环转不下去，多 Agent 场景下还有相反的一种失败：循环停不下来。**失控的 Agent 有时会生成数千个子 Agent，浪费大量 token**。因此，对于自主性较强的 Agent，建议使用独立的 API key，防止 token 开销不受控增长。
 
 ### 失败模式六：理解债与认知投降
@@ -579,6 +627,10 @@ Andrej Karpathy 曾说，“你可以外包你的思考，但不能外包你的�
 以上所有讨论都是工程视角：如何让一组 Agent 协作完成任务。接下来视角切换：当大量 Agent 长期共存、不再由单一目标驱动时，会涌现什么？
 
 ## Agent 社会
+
+![小黑图：Agent 社会中的协作与竞争必须建立在权限、证据、结算和仲裁规则上](../assets/ai-agent-book-illustrations-v2/ch10/20-core-agent-society-rules.png)
+
+![小黑补充图：Agent 社会的身份、证据、预算和仲裁四条底线](../assets/ai-agent-book-illustrations-v2/ch10/26-s-agent-society-rules.png)
 
 前面三节讨论的都是目标明确的任务协作。接下来将视角转向一个更开放的问题：**当 Agent 数量从几个扩展到成百上千、交互足够自由时，会涌现出什么行为？**
 

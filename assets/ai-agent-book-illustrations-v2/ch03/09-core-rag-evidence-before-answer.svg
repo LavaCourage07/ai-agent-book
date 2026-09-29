@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1792" height="1024" viewBox="0 0 1792 1024">
+  <rect width="1792" height="1024" fill="#fff"/>
+  <g fill="none" stroke="#181818" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M122 628 C151 562 264 552 315 611 C359 666 330 752 263 766 C194 778 129 727 122 667Z" fill="#181818"/>
+    <ellipse cx="211" cy="656" rx="9" ry="14" fill="#fff" stroke="none"/><ellipse cx="244" cy="656" rx="9" ry="14" fill="#fff" stroke="none"/>
+    <path d="M159 733 L145 800 M287 733 L304 800 M299 642 C365 601 417 576 470 562"/>
+    <path d="M461 522 C554 449 730 453 805 538 L789 733 C690 797 548 779 473 707Z"/>
+    <path d="M506 587 L756 587 M506 640 L717 640"/>
+    <path d="M799 614 C853 614 894 614 935 614" stroke="#f48a22"/><path d="M902 598 L940 614 L902 631" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M963 349 L1260 349 L1260 719 L963 719Z"/>
+    <path d="M992 412 L1229 412 M992 482 L1229 482 M992 552 L1229 552 M992 622 L1229 622"/>
+    <path d="M1015 431 L1079 431 L1079 472 L1015 472Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M1120 501 L1202 501 L1202 542 L1120 542Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M1258 612 C1322 612 1361 612 1401 612" stroke="#f48a22"/><path d="M1368 596 L1406 612 L1368 629" fill="#f48a22" stroke="#f48a22"/>
+    <path d="M1423 497 C1470 443 1577 454 1612 521 C1644 584 1606 675 1535 681 C1468 687 1418 630 1423 570Z" fill="#181818"/>
+    <ellipse cx="1504" cy="558" rx="9" ry="14" fill="#fff" stroke="none"/><ellipse cx="1538" cy="558" rx="9" ry="14" fill="#fff" stroke="none"/>
+    <path d="M1465 636 L1450 704 M1581 636 L1598 704 M1460 534 L1387 500"/>
+    <path d="M1326 749 L1596 749 L1596 853 L1326 853Z" fill="#d9efff" stroke="#1d74d8"/>
+    <path d="M1364 792 L1554 792"/>
+    <path d="M1385 438 L1438 399" stroke="#e84b2b"/><path d="M1415 438 L1445 408" stroke="#e84b2b"/>
+  </g>
+  <g font-family="PingFang SC, Noto Sans CJK SC, sans-serif" font-size="40" font-weight="700" fill="#181818">
+    <text x="107" y="540">问题</text><text x="500" y="418">检索</text><text x="1010" y="300">知识库</text><text x="1353" y="895" fill="#1d74d8">有证据再回答</text>
+    <text x="1307" y="447" fill="#e84b2b">别凭空写</text><text x="718" y="858" fill="#f48a22">取回相关片段</text>
+  </g>
+</svg>
