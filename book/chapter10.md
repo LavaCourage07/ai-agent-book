@@ -1,6 +1,6 @@
 # 多 Agent 协作
 
-## 本章可编辑思维导图
+## 思维导图概览
 
 > [在 VS Code Office Viewer 中打开并编辑第 10 章 XMind 思维导图](../mindmaps/chapter10-mindmap.xmind)
 >

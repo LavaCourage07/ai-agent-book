@@ -1,6 +1,6 @@
 # 交互：观察与动作空间的扩展
 
-## 本章可编辑思维导图
+## 思维导图概览
 
 > [在 VS Code Office Viewer 中打开并编辑第 6 章 XMind 思维导图](../mindmaps/chapter6-mindmap.xmind)
 >

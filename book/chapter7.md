@@ -1,6 +1,6 @@
 # Agent 的评估
 
-## 本章可编辑思维导图
+## 思维导图概览
 
 > [在 VS Code Office Viewer 中打开并编辑第 7 章 XMind 思维导图](../mindmaps/chapter7-mindmap.xmind)
 >

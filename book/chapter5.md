@@ -1,6 +1,6 @@
 # Coding Agent 与通用 Agent
 
-## 本章可编辑思维导图
+## 思维导图概览
 
 > [在 VS Code Office Viewer 中打开并编辑第 5 章 XMind 思维导图](../mindmaps/chapter5-mindmap.xmind)
 >
